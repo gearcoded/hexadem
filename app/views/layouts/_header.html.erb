@@ -5,7 +5,7 @@
       <nav>
         <ul class="nav push-right">
           <li><%= link_to "About",    about_path %></li>
-          <li><%= link_to "Coder",    coder_path %></li>
+          <li><%= link_to "Coder",    coder_path, data: { turbolinks: false } %></li>
           <li><%= link_to "Home", root_path %></li>
         </ul>
       </nav>
