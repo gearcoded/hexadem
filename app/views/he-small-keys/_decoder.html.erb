@@ -1,0 +1,118 @@
+<%= form_for $decoder do |form| %>
+<%= form.label $decoder %>
+<%= form.hidden_field $enko=params[$decoder] || {"enk"=>"", "key"=>5} %>
+
+
+<% 
+puts 'enko here'
+puts $enko['enk']
+puts $enko['key']
+puts $enko
+
+
+enko=$enko['enk']
+key=$enko['key'].to_i
+key=5 if $enko['key'].size==0 
+####Внимание!!!! Нужно как-то запретить ставить нолик. Либо вместо этого использовать что-то другое.
+
+puts 
+puts 
+puts ''
+puts key
+puts key.class
+
+signa=("f"*key).to_i(16).to_s(10).size
+
+
+
+
+puts "Convert into DEC:"
+enko=enko.to_i(16).to_s(10)
+puts enko
+
+puts "Adding zeroes for square table"
+enko='0'*(-enko.size%signa)+enko
+puts enko
+
+puts "Splitting into signa-amount of charachters:"
+enkoma =enko.scan(/.{#{signa}}/)
+puts enkoma
+
+puts "Now converting the array into hex:"
+enkoma.map! do |c|
+c=c.to_i(10).to_s(16).rjust(key,'0')
+end
+puts
+puts enkoma
+
+#puts "Now removing placeholder zeroes:"
+#enkoma[0]=enkoma[0].to_i
+#puts enkoma
+
+
+
+puts "Now join it into one block:"
+enko=enkoma.join
+puts enko
+
+puts
+#qwant=-enko.length%key
+#puts qwant
+
+#enko=enko[qwant..-1]
+
+puts "Removing leading zeroes"
+enko
+
+enko=enko.sub(/^[0]+/,'')
+
+puts "Converting back to human language:"
+deko= [enko].pack("H*")
+puts enko
+
+
+#$enko['text']=enko
+
+%>
+
+
+  <%= form.label 'decoded' %>
+<%= form.text_area :enk, value: $enko['enk']  %><P>
+<%= text_area_tag 'decoded', deko   %>
+
+
+    <%= form.label 'key' %>
+    <%= form.text_field :key, value: $enko['key'] %>
+        <P>
+  <%= 
+  	if params['commit']!='Decode!' then 
+  
+form.submit "Decode!"  
+else 
+
+link_to "<button>New Decode!</button>".html_safe, coder_path, :method => :get
+end
+
+
+%>
+<P>
+<%# form.label :text, value: $enko  %>
+
+<%# form.text_field [$decoder], value:'teet'%>
+
+<%#
+puts 'this is for debug'
+puts params[$decoder]
+puts 'reset'
+params.delete(/\D/) if params[$decoder]
+puts params[$decoder]
+
+%>
+
+
+
+<div class="field">
+
+</div>
+   
+<% end  %>

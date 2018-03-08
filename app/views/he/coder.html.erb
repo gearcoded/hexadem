@@ -1,0 +1,62 @@
+<p>Encode or decode?</p>
+
+<P>
+<table id='codert'>
+<tr>
+<td>
+<%= render 'encoder' %>
+
+</td>
+<td style='border-left: 2px dashed rgba(158,139,82,.9);'>
+<%= render 'decoder' %>
+
+
+
+</td>
+
+</tr>
+</table>
+
+
+
+
+  <div class= 'popup' id="page-mask" ></div>
+  <div class= 'popup' id="window" align=center>Large text and long keys increase calculation time.<P>
+  Please don't leave the page, just wait... 
+  <P>And be ready to prepare a lot of RAM!<P>
+
+
+
+
+  <%= image_tag "hive.png", alt: 'hive', size: '128x128', class: 'hive' %>
+
+  <%= image_tag "123.png", alt: '123', size: '128x128', class: 'exps' %>  
+  </div>
+
+
+
+<P>
+ <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  
+  <script>
+  $(document).ready(function(){
+$( ".calculate" ).click(function(){
+  $('.popup').show();
+  });
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

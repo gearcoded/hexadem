@@ -1,0 +1,6 @@
+  attr_accessor :key, :text
+  
+   def initialize(attributes = {})
+    @key  = attributes[:key]
+    @text = attributes[:text]
+  end

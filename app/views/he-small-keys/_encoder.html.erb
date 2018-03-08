@@ -1,0 +1,91 @@
+<%= form_for $encoder do |form| %>
+<%= form.label $encoder %>
+<%= form.hidden_field $tek=params[$encoder] || {"text"=>"", "key"=>5} %>
+
+
+<% 
+puts 'begins here'
+puts $tek['text']
+puts $tek['key']
+
+
+init=$tek['text']
+key=$tek['key'].to_i
+key=5 if $tek['key'].size==0 
+####Внимание!!!! Нужно как-то запретить ставить нолик. Либо вместо этого использовать что-то другое.
+
+puts 'init'
+puts init
+puts 'ki'
+puts key
+puts key.class
+
+signa=("f"*key).to_i(16).to_s(10).size.to_s.to_i
+
+
+
+puts "Into hex:"
+enko= init.unpack("H*")[0]
+puts enko
+
+#вычисление количества недостающх до квадратной таблицы символов
+qwant=-enko.length%key
+puts qwant
+enko='0'*qwant+enko
+puts enko
+
+puts "Splitting into 5 charachters:"
+enkoma =enko.scan(/.{#{key}}/)
+#enkoma =enko.split(/(.{5})\s/)
+puts enkoma
+puts "Now converting the array into dec:"
+enkoma.map! do |c|
+c=c.to_i(16).to_s(10).rjust(signa,'0')
+end
+puts
+puts enkoma
+puts
+puts "Now join it into one block:"
+enko=enkoma.join
+puts enko
+puts
+puts "Now convert it into hex again:"
+converted=enko.to_i(10).to_s(16)
+
+puts $tek['text']
+
+puts $tek['text'].size
+puts enko.size
+
+
+%>
+
+  <%= form.label 'decoded' %>
+  <%= form.text_area :text, value: $tek['text'] %><P>
+    <%= form.text_area :encoded, value: converted  %>
+
+    <%= form.label 'key' %>
+    <%= form.text_field :key, value: $tek['key'] %>
+        <P>
+	<%=
+	if params['commit']!='Encode!' then 
+
+form.submit "Encode!"  
+
+else 
+
+link_to "<button>New Encode!</button>".html_safe, coder_path, :method => :get
+end
+
+
+%>
+  
+<P>
+<%# form.label :text, value: $tek %><P>
+
+
+<div class="field">
+
+</div>
+   
+<% end  %>

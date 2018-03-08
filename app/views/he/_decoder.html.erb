@@ -1,0 +1,155 @@
+#encoding: utf-8
+<%= form_for $decoder do |form| %>
+<% form.label $decoder %>
+<%= form.hidden_field $enko=params[$decoder] || {"enk"=>"", "key"=>''} %>
+
+
+<% 
+puts 'enko here'
+puts $enko['enk']
+puts $enko['key']
+puts $enko
+
+
+enko=$enko['enk'].force_encoding('utf-8')
+kiis=$enko['key'].force_encoding('utf-8')
+puts kiis
+
+
+puts 'key size validation block'
+if kiis.size<=7 then
+
+kiis=kiis.codepoints.join
+puts kiis
+
+kiis=kiis.reverse
+puts kiis
+
+kiis=kiis.split('')
+puts kiis.to_s
+
+puts 'beginning kiis block'
+
+kiis.each do |key|
+
+key=key.to_i 
+if key!=0 then
+
+signa=("f"*key).to_i(16).to_s(10).size
+
+
+
+
+puts "Convert into DEC:"
+enko=enko.to_i(16).to_s(10)
+puts enko
+
+puts "Adding zeroes for square table"
+enko='0'*(-enko.size%signa)+enko
+puts enko
+
+puts "Splitting into signa-amount of charachters:"
+enkoma =enko.scan(/.{#{signa}}/)
+puts enkoma
+
+puts "Now converting the array into hex:"
+enkoma.map! do |c|
+c=c.to_i(10).to_s(16).rjust(key,'0')
+end
+puts
+puts enkoma
+
+#puts "Now removing placeholder zeroes:"
+#enkoma[0]=enkoma[0].to_i
+#puts enkoma
+
+
+
+puts "Now join it into one block:"
+enko=enkoma.join
+puts enko
+
+puts
+#qwant=-enko.length%key
+#puts qwant
+
+puts 'ending kiis block'
+
+end
+end
+
+#enko=enko[qwant..-1]
+
+puts "Removing leading zeroes"
+enko
+
+enko=enko.sub(/^[0]+/,'')
+
+
+
+
+
+puts "Converting back to human language:"
+deko= [enko].pack("H*")
+puts deko
+puts params
+puts deko.encoding
+deko.force_encoding('UTF-8')
+puts deko
+puts deko.encoding
+
+
+
+
+
+
+#$enko['text']=enko
+
+puts 'ending key size validation block'
+else 
+$enko['key']='Your key is too big. Try again!'
+
+end
+
+%>
+
+
+  <%= form.label 'Input encoded text here:' %>
+  <%= form.text_area :enk, value: $enko['enk']  %><P>
+    <%= form.label 'Decoded text:' %>
+
+<%= text_area_tag 'decoded', deko   %>
+
+
+    <%= form.label 'key' %>
+    <%= form.text_field :key, value: $enko['key'] %>
+        <P>
+  <%= 
+  	if params['commit']!='Decode!' then 
+  
+form.submit "Decode!", class: 'calculate'  
+else 
+
+link_to "<button>New Decode!</button>".html_safe, coder_path, :method => :get
+end
+
+
+%>
+<P>
+
+<%#
+puts 'this is for debug'
+puts params[$decoder]
+puts 'reset'
+params.delete(/\D/) if params[$decoder]
+puts params[$decoder]
+
+%>
+
+
+
+<div class="field">
+
+</div>
+   
+<% end  %>

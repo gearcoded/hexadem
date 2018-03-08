@@ -1,0 +1,135 @@
+#encoding: utf-8
+<%= form_for $encoder do |form| %>
+<% form.label $encoder %>
+<%= form.hidden_field $tek=params[$encoder] || {"text"=>"", "key"=>''} %>
+
+
+<% 
+puts 'begins here'
+puts $tek['text']
+puts $tek['key']
+
+
+
+
+init=$tek['text'].force_encoding('utf-8')
+kiis=$tek['key'].force_encoding('utf-8')
+puts kiis
+
+puts 'key size validation block'
+if kiis.size<=7 then
+
+puts "Into hex:"
+enko= init.unpack("H*")[0]
+puts enko
+
+puts puts
+
+kiis=kiis.codepoints.join
+puts kiis
+
+
+kiis=kiis.split('')
+puts kiis.to_s
+
+puts 'beginning kiis block'
+
+kiis.each do |key|
+
+key=key.to_i 
+if key!=0 then
+
+
+puts 'enko'
+puts enko
+puts 'ki'
+puts key
+puts key.class
+
+signa=("f"*key).to_i(16).to_s(10).size.to_s.to_i
+
+
+
+
+
+#вычисление количества недостающх до квадратной таблицы символов
+qwant=-enko.length%key
+puts qwant
+enko='0'*qwant+enko
+puts enko
+
+puts "Splitting into 5 charachters:"
+enkoma =enko.scan(/.{#{key}}/)
+#enkoma =enko.split(/(.{5})\s/)
+puts enkoma
+puts "Now converting the array into dec:"
+enkoma.map! do |c|
+c=c.to_i(16).to_s(10).rjust(signa,'0')
+end
+puts
+puts enkoma
+puts
+puts "Now join it into one block:"
+enko=enkoma.join
+puts enko
+
+
+
+puts
+puts "Now convert it into hex again:"
+enko=enko.to_i(10).to_s(16)
+
+puts 'ending kiis block'
+
+end
+end
+
+converted=enko
+
+
+puts $tek['text']
+
+puts $tek['text'].size
+puts enko.size
+
+puts 'ending key size validation block'
+else 
+$tek['key']='Your key is too big. Try again!'
+
+end
+
+
+
+%>
+
+  <%= form.label 'Input your text here:' %>
+  <%= form.text_area :text, value: $tek['text'] %><P>
+  <%= form.label 'Encoded text:' %>
+    <%= form.text_area :encoded, value: converted  %>
+
+    <%= form.label 'key' %>
+    <%= form.text_field :key, value: $tek['key'] %>
+        <P>
+	<%=
+	if params['commit']!='Encode!' then 
+
+form.submit "Encode!", class: 'calculate'  
+
+else 
+
+link_to "<button>New Encode!</button>".html_safe, coder_path, :method => :get
+end
+
+
+%>
+  
+<P>
+<%# form.label :text, value: $tek %><P>
+
+
+<div class="field">
+
+</div>
+
+   
+<% end  %>
