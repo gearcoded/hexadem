@@ -116,7 +116,7 @@ if (kiis.size>4) then
 $enko['key']='Your key is too big. Change it and try again!'
 end
 
-if (enko.size>60000) then
+if (enko.size>90000) then
 deko='Your text is too big. Change it and try again!'
 end
 
@@ -125,7 +125,7 @@ end
 %>
 
 
-  <%= form.label 'Encoded text: (Max: 4000)' %>
+  <%= form.label 'Encoded text: (Max: 90000)' %>
   <%= form.text_area :enk, value: $enko['enk']  %><P>
     <%= form.label 'Decoded text:' %>
 
