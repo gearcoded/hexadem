@@ -19,7 +19,7 @@ puts kiis
 #This is only for heroku originaly you could set kiis.size to 7:
 puts 'key size validation block'
 #if kiis.size<=7 then
-if (kiis.size<=4) and (enko.size<=4000) then
+if (kiis.size<=4) and (enko.size<=70000) then
 
 kiis=kiis.codepoints.join
 puts kiis
@@ -116,7 +116,7 @@ if (kiis.size>4) then
 $enko['key']='Your key is too big. Change it and try again!'
 end
 
-if (enko.size>4000) then
+if (enko.size>60000) then
 deko='Your text is too big. Change it and try again!'
 end
 
