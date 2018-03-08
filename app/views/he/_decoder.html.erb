@@ -16,8 +16,10 @@ kiis=$enko['key'].force_encoding('utf-8')
 puts kiis
 
 
+#This is only for heroku originaly you could set kiis.size to 7:
 puts 'key size validation block'
-if kiis.size<=7 then
+#if kiis.size<=7 then
+if (kiis.size<=4) and (enko.size<=4000) then
 
 kiis=kiis.codepoints.join
 puts kiis
@@ -107,21 +109,30 @@ puts deko.encoding
 
 puts 'ending key size validation block'
 else 
-$enko['key']='Your key is too big. Try again!'
+
+
+
+if (kiis.size>4) then
+$enko['key']='Your key is too big. Change it and try again!'
+end
+
+if (enko.size>4000) then
+deko='Your text is too big. Change it and try again!'
+end
 
 end
 
 %>
 
 
-  <%= form.label 'Input encoded text here:' %>
+  <%= form.label 'Encoded text: (Max: 4000)' %>
   <%= form.text_area :enk, value: $enko['enk']  %><P>
     <%= form.label 'Decoded text:' %>
 
 <%= text_area_tag 'decoded', deko   %>
 
 
-    <%= form.label 'key' %>
+    <%= form.label 'key: (Max: 4)' %>
     <%= form.text_field :key, value: $enko['key'] %>
         <P>
   <%= 

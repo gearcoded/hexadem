@@ -16,8 +16,12 @@ init=$tek['text'].force_encoding('utf-8')
 kiis=$tek['key'].force_encoding('utf-8')
 puts kiis
 
+
+
+#This is only for heroku originaly you could set kiis.size to 7:
 puts 'key size validation block'
-if kiis.size<=7 then
+#if kiis.size<=7 then
+if (kiis.size<=4) and (init.size<=4000) then
 
 puts "Into hex:"
 enko= init.unpack("H*")[0]
@@ -94,7 +98,14 @@ puts enko.size
 
 puts 'ending key size validation block'
 else 
-$tek['key']='Your key is too big. Try again!'
+
+if (kiis.size>4) then
+$tek['key']='Your key is too big. Change it and try again!'
+end
+
+if (init.size>4000) then
+converted='Your text is too big. Change it and try again!'
+end
 
 end
 
@@ -102,12 +113,12 @@ end
 
 %>
 
-  <%= form.label 'Input your text here:' %>
+  <%= form.label 'Original text: (Max: 4000)' %>
   <%= form.text_area :text, value: $tek['text'] %><P>
   <%= form.label 'Encoded text:' %>
     <%= form.text_area :encoded, value: converted  %>
 
-    <%= form.label 'key' %>
+    <%= form.label 'key: (Max: 4)' %>
     <%= form.text_field :key, value: $tek['key'] %>
         <P>
 	<%=
