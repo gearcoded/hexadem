@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+root 'he#home'
   match '/home',    to: 'he#home',    via: 'get'
       match '/home',    to: 'he#home',    via: 'post'
 
