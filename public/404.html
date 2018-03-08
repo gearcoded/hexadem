@@ -2,8 +2,7 @@
 <html>
   <head>
     <title>Hexadem</title>
-    <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="3tenSvDwYUnVtKlXK3wTNRNJTCBGr4Ibh+APC0/I87yQrM7Np2Gj8UbyiBpTKlFv3hLihSar26khYw2YDNrWBg==" />
+
 
     <link rel="stylesheet" media="all" href="/assets/custom.self-6301a6d7dc2434030f6c92f128b938ba79319417712a71e766da0fcfdd136c9e.css?body=1" data-turbolinks-track="reload" />
 <link rel="stylesheet" media="all" href="/assets/he.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="reload" />
@@ -18,66 +17,89 @@
   </head>
 
   <body>
-      <header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container pull-left">
-      <a id="logo" href="/">HEXADEM</a>
-      <nav>
-        <ul class="nav push-right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/coder">Coder</a></li>
-          <li><a href="/">Home</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
-
-
-
-
-
 
 
   <div align=center ><b>Error 404</b><P><P>
   Usually, there is some funny or serious text about the error.<P>
   So I decided to put a flying bee. <P>
   When you are satisfied after watching the bee, <P>
-  open another page.
-  
+  open home page:<P>
+  <a id="logo" href="/">HEXADEM</a>
 
 
 
 
-  <img alt="123" class="exps" src="/assets/123-7d347f5f515d700a09ce3f7fd05a4978efc1bbba404ac48cb5625efe35801ea8.png" width="128" height="128" />  
+  <img alt="I'm a bee" class="exps" src="/assets/123-7d347f5f515d700a09ce3f7fd05a4978efc1bbba404ac48cb5625efe35801ea8.png" width="128" height="128" />  
   </div>
 
 
+<style>
 
-<P>
- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+html,body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background-color: #F2C378;
+
+
+
+  height: 100%;
+  -webkit-font-smoothing: antialiased; }
   
-  <script>
-  $(document).ready(function(){
-$( ".calculate" ).click(function(){
-  $('.popup').show();
-  });
-  });
-  </script>
+
+
+body {
+  color: #333;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-bottom: 30px;
+
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: auto;
+    width: auto;
+
+  background-image: url('beeckground.png');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 5% 30%;
+  
+}
+
+
+
+
+
+@keyframes exps { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg) skew(00deg,90deg)} }
+@-moz-keyframes exps { 100% { -moz-transform: rotate(-360deg); } }
+@-webkit-keyframes exps { 
+ 0%  { -webkit-transform: rotate(0deg) translateX(5px) translateY(120px) rotate(0deg) scale(1) ; }
+ 25%  { -webkit-transform: translateX(5px) translateY(120px) rotate(-90deg) scale(.75); }
+ 50%  { -webkit-transform:  translateX(5px) translateY(120px) rotate(-180deg) scale(.60); }
+ 75%  { -webkit-transform: rotate(270deg) translateX(5px) translateY(120px) rotate(-270deg) scale(.75); }
+ 100%  { -webkit-transform: rotate(360deg) translateX(5px) translateY(120px) rotate(-360deg) scale(1); }
+
+ }
+
+
+.exps {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+     -webkit-animation:exps 4s linear infinite;
+    -moz-animation:exps 4s linear infinite;
+    animation:exps 5s linear infinite;
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
+</style>
 
 
   </body>
